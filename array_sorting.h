@@ -4,7 +4,7 @@
 
 #include "help_functions.h"
 
-int* insertion_sort(int* arr, int len){
+void insertion_sort(int* arr, int len){
 
     int key, j;
 
@@ -21,6 +21,24 @@ int* insertion_sort(int* arr, int len){
         }
 
     }
-
-    return arr;
 }
+
+// --------------- MERGE SORT ---------------
+void merge_divide(int ini, int end){
+    int mid;
+
+    printf("Ini: %d,\tEnd:%d,\tDist:%d\n", ini, end, end - ini);
+
+    if(ini != end){
+        mid = (end + ini) / 2;
+        merge_divide(ini, mid);
+        merge_divide(mid + 1, end);
+    }
+}
+
+void merge_sort(int *arr, int len){
+    printf("\n\n");
+    merge_divide(0, len - 1);
+    printf("\n\n");
+}
+// ------------------------------------------
