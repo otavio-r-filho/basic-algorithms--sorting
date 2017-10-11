@@ -81,7 +81,7 @@ void merge_conquer(int *arr, int ini, int mid, int end){
     printf("\n");
 
     printf("Ordered subarray: ");
-    print_array(arr, 0, temp_size - 1);
+    print_array(temp_arr, 0, temp_size - 1);
     printf("\n\n");
 
     for(temp_idx = 0; temp_idx < temp_size; temp_idx++){
