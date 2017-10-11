@@ -3,7 +3,17 @@
 */
 
 #include "help_functions.h"
+// --------------- FUNCTIONS PROTOTYPES ---------------
+// ----------------- INSERTION SORT -------------------
+void insertion_sort(int *arr, int len);
 
+void merge_sort(int *arr, int len);
+void merge_divide(int *arr, int ini, int end);
+void merge_conquer(int* arr, int ini, int mid, int end);
+// ----------------------------------------------------
+
+
+// ------------------ INSERTION SORT ------------------
 void insertion_sort(int* arr, int len){
 
     int key, j;
@@ -24,21 +34,60 @@ void insertion_sort(int* arr, int len){
 }
 
 // --------------- MERGE SORT ---------------
-void merge_divide(int ini, int end){
-    int mid;
+void merge_sort(int *arr, int len){
+    merge_divide(arr, 0, len - 1);
+}
 
-    printf("Ini: %d,\tEnd:%d,\tDist:%d\n", ini, end, end - ini);
+void merge_divide(int *arr, int ini, int end){
+    int mid;
 
     if(ini != end){
         mid = (end + ini) / 2;
-        merge_divide(ini, mid);
-        merge_divide(mid + 1, end);
+        merge_divide(arr, ini, mid);
+        merge_divide(arr, mid + 1, end);
+        merge_conquer(arr, ini, mid, end);
     }
 }
 
-void merge_sort(int *arr, int len){
+void merge_conquer(int *arr, int ini, int mid, int end){
+
+    int left_idx = ini, right_idx = mid + 1;
+
+    int temp_size = end - ini + 1, temp_idx = 0;
+    int *temp_arr = (int*) malloc(temp_size * sizeof(int));
+
+    while(temp_idx < temp_size){
+        if((left_idx < mid + 1) && (right_idx < end + 1)){
+            if(arr[left_idx] < arr[right_idx]){
+                temp_arr[temp_idx++] = arr[left_idx++];
+            }else{
+                temp_arr[temp_idx++] = arr[right_idx++];
+            }
+        } else {
+            if(left_idx < mid + 1){
+                temp_arr[temp_idx++] = arr[left_idx++];
+            }else{
+                temp_arr[temp_idx++] = arr[right_idx++];
+            }
+        }
+    }
+
+    printf("Unordered left subarray: ");
+    print_array(arr, ini, mid);
+    printf("\n");
+
+    printf("Unordered right subarray: ");
+    print_array(arr, mid + 1, end);
+    printf("\n");
+
+    printf("Ordered subarray: ");
+    print_array(arr, 0, temp_size - 1);
     printf("\n\n");
-    merge_divide(0, len - 1);
-    printf("\n\n");
+
+    for(temp_idx = 0; temp_idx < temp_size; temp_idx++){
+        arr[temp_idx + ini] = temp_arr[temp_idx];
+    }
+
+    free(temp_arr);
 }
 // ------------------------------------------

@@ -12,7 +12,7 @@ int* get_random_array(int len, int range){
     */
 
 	int *random_nums;
-	random_nums = malloc(len * sizeof(int));
+	random_nums = (int*) malloc(len * sizeof(int));
 
 	srand(time(NULL));
 
@@ -21,6 +21,14 @@ int* get_random_array(int len, int range){
 	}
 
 	return random_nums;
+}
+
+void print_array(int *arr, int ini, int end){
+	int i;
+
+	for(int i = ini; i < end + 1; i++){
+		printf("%d ", arr[i]);
+	}
 }
 
 #endif

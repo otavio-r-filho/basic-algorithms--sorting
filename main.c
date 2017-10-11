@@ -14,6 +14,8 @@ int main(int argc, char **argv){
 		len = atoi(argv[1]);
 	}
 
+	printf("Total number of arguments: %d\n", argc);
+
 	int *random_nums;
 	random_nums = get_random_array(len, 100);
 
@@ -34,7 +36,7 @@ int main(int argc, char **argv){
 	}
 	printf("\n\n");
 
-	printf("Total computation time %d", finish_time - start_time);
+	printf("Total computation time %ld\n", finish_time - start_time);
 	
 	return 0;
 }
